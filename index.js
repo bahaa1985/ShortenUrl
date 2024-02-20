@@ -4,8 +4,6 @@ import https from 'https';
 const app=express();
 
 
-
-
 app.get('/',func,(req,res)=>{
 
     res.write('<h1>Welcome!</h1>')
