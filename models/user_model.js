@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const schema = new mongoose.Schema({'name':String,'email':String,'password':String});
 
-const Users=mongoose.model('Users',schema);
+const User=mongoose.model('User',schema);
 
-export default Users;
+export default User;
 

@@ -1,7 +1,7 @@
 import express from 'express';
 import https from 'https';
 
-const shortenrouter=express.Router();
+const shortenRouter=express.Router();
 
 async function validateHost(req,res,next){
     var options = {
