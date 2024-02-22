@@ -37,7 +37,7 @@ export function newUser(user_name, user_email, user_password) {
       .save()
       .then((result) => {
         if (result) {
-          console.log(result._id);
+          console.log(result);
           return result;
         }
       })
