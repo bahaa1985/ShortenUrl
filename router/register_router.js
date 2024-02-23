@@ -12,30 +12,34 @@ const RegisterRouter=express.Router();
 
 RegisterRouter
 .get('/',(req,res)=>{
-    sendConfirmationMail().then((result) => {
+   
+})
+.post('/',urlEncoded,(req,res)=>{
+    const {user_name,user_email}=req.body;
+    sendConfirmationMail(user_name,user_email).then((result) => {
         if(result){
-            // console.log('Sent!')
+            const secret_key=process.env.SECRET_KEY;
+            const reg_token=jwt.sign({name:user_name,email:user_email},secret_key,{expiresIn:'1h'});
+            res.cookie("reg_token",reg_token,{httpOnly:true});
             res.write("Email Sent!");
         }
     }).catch((err) => {
         console.log('register router get error: ', err.message);
     });
-})
-.post('/',urlEncoded,(req,res)=>{
-    const {user_name,user_email,user_password}=req.body;
-    const foundUser=findUser(user_email,user_name);
-    if(foundUser){
 
-    }
-    else{
-        const newUser=newUser(user_name,user_email,user_password);
-        if(newUser){
+    // const foundUser=findUser(user_email,user_name);
+    // if(foundUser){
+
+    // }
+    // else{
+    //     const newUser=newUser(user_name,user_email,user_password);
+    //     if(newUser){
             
-        }
-        else{
+    //     }
+    //     else{
     
-        }
-    }
+    //     }
+    // }
     
 })
 
