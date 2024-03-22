@@ -12,34 +12,22 @@ const RegisterRouter=express.Router();
 
 RegisterRouter
 .get('/',(req,res)=>{
-   
+   res.status(200).send('rtrtrtr')
 })
 .post('/',urlEncoded,(req,res)=>{
-    const {user_name,user_email}=req.body;
-    sendConfirmationMail(user_name,user_email).then((result) => {
+    const {name,email}=req.body;
+    sendConfirmationMail(name,email).then((result) => {
         if(result){
-            const secret_key=process.env.SECRET_KEY;
-            const reg_token=jwt.sign({name:user_name,email:user_email},secret_key,{expiresIn:'1h'});
-            res.cookie("reg_token",reg_token,{httpOnly:true});
-            res.write("Email Sent!");
+            const reg_token=jwt.sign({name:name,email:email},secret_key,{expiresIn:'1h'});
+             res.cookie("reg_token",reg_token,{httpOnly:true});
+            res.status(200).send("Email Sent!");
+            // next();
         }
     }).catch((err) => {
         console.log('register router get error: ', err.message);
+        // next();
     });
-
-    // const foundUser=findUser(user_email,user_name);
-    // if(foundUser){
-
-    // }
-    // else{
-    //     const newUser=newUser(user_name,user_email,user_password);
-    //     if(newUser){
-            
-    //     }
-    //     else{
     
-    //     }
-    // }
     
 })
 

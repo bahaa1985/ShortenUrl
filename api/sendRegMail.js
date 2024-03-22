@@ -24,6 +24,7 @@ async function sendConfirmationMail(user_name,user_email){
     html:"<body><b>Hi from Bahaa</b><br/><a href='http://localhost:5000/confirm'>click here!</a></body>"
    })
    return info;
+   
 }
 
 export default sendConfirmationMail;
